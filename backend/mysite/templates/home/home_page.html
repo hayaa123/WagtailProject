@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+
+    {% image self.banner_image width-1500 as img  %}
+    <div class="bg-primary  text-dark bg-opacity-10 vh-50" style ="background-image: url('{{img.url}}'); background-size: cover;background-repeat: no-repeat;padding: 7%;background-position: right bottom;height: 500px;">
+        <div class="title-content" style="background-color: rgba(0, 0, 0, 0.445);width: fit-content;padding: 30px;">
+            <h1 class="display-4"> {{self.banner_title}}</h1>
+            <div class="lead">{{self.banner_subtitle|richtext}}</div>
+            {% if self.banner_cta %}
+                <a class="btn btn-primary btn-lg">click here</a>
+            {% endif %}
+        </div>
+        
+    </div>
+   
+{% endblock %}
