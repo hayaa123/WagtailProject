@@ -7,8 +7,10 @@ authors = ["hayaa1234 <hayalawansah@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 wagtail = "^2.16.1"
+django-debug-toolbar = "^3.2.4"
 
 [tool.poetry.dev-dependencies]
+autopep8 = "^1.6.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
