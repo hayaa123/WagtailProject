@@ -3,6 +3,7 @@
 {% block content %}
 
     {% image self.banner_image width-1500 as img  %}
+    <div>
     <div class="bg-primary  text-dark bg-opacity-10 vh-50" style ="background-image: url('{{img.url}}'); background-size: cover;background-repeat: no-repeat;padding: 7%;background-position: right bottom;height: 500px;">
         <div class="title-content" style="background-color: rgba(0, 0, 0, 0.445);width: fit-content;padding: 30px;">
             <h1 class="display-4"> {{self.banner_title}}</h1>
@@ -12,6 +13,33 @@
             {% endif %}
         </div>
         
+
+
+
+        
     </div>
-   
+
+
+
+
+
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for caroselimage in self.carosel_images.all %}
+                {% image caroselimage.carosel_image fill-900x400 as img %}
+                    <div class="carousel-item{% if forloop.counter == 1 %} active {% endif %}">
+                        <img src="{{ img.url }}" class="d-block w-100" alt="{{ img.alt }}">
+                    </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      </div>
 {% endblock %}
