@@ -1,14 +1,17 @@
 from pyexpat import features
-from re import template
 from tabnanny import verbose
 from tkinter.font import BOLD, ITALIC
 from turtle import heading, ondrag
 from django.db import models
+from django.shortcuts import render
 from wagtail.admin.edit_handlers import FieldPanel ,PageChooserPanel,StreamFieldPanel,InlinePanel,MultiFieldPanel
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page , Orderable
 from wagtail.core.fields import RichTextField
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.contrib.routable_page.models import RoutablePageMixin ,route
+
+
 from streams import blocks
 from modelcluster.fields import ParentalKey
 
@@ -29,7 +32,7 @@ class HomePageCaroselImages(Orderable):
         ImageChooserPanel("carosel_image")
     ]
 
-class HomePage(Page):
+class HomePage(RoutablePageMixin,Page):
     """
     Home page model
     """
@@ -80,3 +83,9 @@ class HomePage(Page):
     class Meta :
         verbose_name = "Home Page"
         verbose_name_plural ="Home Pages"
+
+    @route(r'^subscribe/$')
+    def the_subscribe_page(self,request,*args,**kwargs):
+        context = self.get_context(request,*args ,**kwargs)
+        context["test"] = "hello world"
+        return render(request , "home/subscribe.html",context)

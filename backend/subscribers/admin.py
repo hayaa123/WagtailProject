@@ -11,7 +11,7 @@ class SubscriberAdmin(ModelAdmin):
 
     model = Subscriber
     menu_label = "blog_subscribers"
-    menu_icon ="placeholder"
+    menu_icon ="pick"
     menu_order = 290
     add_to_settings_menu = False
     exclude_from_explorer = False
