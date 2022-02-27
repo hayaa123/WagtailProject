@@ -2,8 +2,6 @@
 Streamfield live in here
 """
 
-from email.policy import default
-import re
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
@@ -90,4 +88,29 @@ class CTABlock(blocks.StructBlock):
         template = "streams/cta_block.html"
         icon = "placeholder"
         label = "Call to action "
+class LinkStructValue(blocks.StructValue):
+    """
+    additional logic for our urls
+    """
+    def url(self):
+        button_page = self.get('button_page')
+        button_url = self.get('button_url')
+        if button_page:
+            return button_page.url
+        elif button_url:
+            return button_url
 
+        return None
+
+# class ButtonBlock(blocks.StructBlock):
+#     """
+#     an external or internal url
+#     """
+#     button_page = blocks.PageChooserBlock(required=False, help_text='If selected, this url will be used first')
+#     button_url = blocks.URLBlock(required=False, help_text='If added, this url will be used secondarily to the button page')
+
+#     class Meta:  
+#         template = "streams/button_block.html"
+#         icon = "placeholder"
+#         label = "Single Button"
+#         value_class = LinkStructValue
