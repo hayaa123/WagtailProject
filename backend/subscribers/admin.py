@@ -4,6 +4,7 @@ from wagtail.contrib.modeladmin.options import (
     ModelAdmin,
     modeladmin_register
 )
+
 class SubscriberAdmin(ModelAdmin):
     """
     subscriber in the admin side 

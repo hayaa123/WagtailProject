@@ -5,7 +5,7 @@ flexible page
 from django.db import models
 from wagtail.core.models import Page
 from wagtail.core.fields import StreamField
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel ,MultiFieldPanel,InlinePanel
 from streams import blocks
 
 
@@ -27,7 +27,8 @@ class FlexPage (Page):
     subtitle = models.CharField(max_length=100, blank=True, null=True)
     content_panels = Page.content_panels + [
         FieldPanel("subtitle"),
-        StreamFieldPanel("content")
+        StreamFieldPanel("content"),
+    
     ]
 
     class Meta:
