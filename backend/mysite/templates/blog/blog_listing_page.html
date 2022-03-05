@@ -4,6 +4,20 @@
 
 {% block content %}
     <a href="{% routablepageurl page 'latest_blog_posts' %}">latest posts</a>
+    <h2>
+        category
+    </h2>
+    <ul>
+        {% for category in categories %}
+            <li> 
+                <a href="?category={{category.slug}}">
+                    {{category.name}}            
+                </a>  
+            </li>
+    
+        {% endfor %}
+    </ul>
+
     <div class="container">
     {% for post in posts %}
         <div class="row">

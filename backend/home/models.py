@@ -4,10 +4,15 @@ from tkinter.font import BOLD, ITALIC
 from turtle import heading, ondrag
 from django.db import models
 from django.shortcuts import render
-from wagtail.admin.edit_handlers import FieldPanel ,PageChooserPanel,StreamFieldPanel,InlinePanel,MultiFieldPanel
-from wagtail.core.fields import StreamField
+from wagtail.admin.edit_handlers import (FieldPanel ,
+    PageChooserPanel,
+    StreamFieldPanel,
+    InlinePanel,
+    MultiFieldPanel)
 from wagtail.core.models import Page , Orderable
-from wagtail.core.fields import RichTextField
+from wagtail.core.fields import (
+    RichTextField,
+    StreamField)
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin ,route
 
@@ -27,6 +32,7 @@ class HomePageCaroselImages(Orderable):
         on_delete=models.SET_NULL,
         related_name="+"
     )
+    
 
     panels = [
         ImageChooserPanel("carosel_image")

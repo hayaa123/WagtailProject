@@ -2,7 +2,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 {% block content %}
 
-    {% image self.banner_image width-1500 as img  %}
+    {% image self.banner_image width-1500 as img %}
     <div>
     <div class="bg-primary  text-dark bg-opacity-10 vh-50" style ="background-image: url('{{img.url}}'); background-size: cover;background-repeat: no-repeat;padding: 7%;background-position: right bottom;height: 500px;">
         <div class="title-content" style="background-color: rgba(0, 0, 0, 0.445);width: fit-content;padding: 30px;">

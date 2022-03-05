@@ -5,7 +5,19 @@
 <img src="{{banner.url}}" alt="{{banner.alt}}" style="width: 100%" />
 <div class="container">
   <div class="text-center">
-    <h1>{{ self.custon_title }}</h1>
+    <h1>
+        {% if self.custom_title %}
+            {{ self.custom_title }}
+        {% else %}
+            {{ self.title }}
+        {% endif %}
+    </h1>
+
+    {% if self.subtitle %}
+        <h3>
+            {{self.subtitle}}
+        </h3>
+    {% endif %}
   </div>
 </div>
 
@@ -23,6 +35,18 @@
  
   {% endfor %}
 </ul>
+
+{% if self.intero_image %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                {% image self.intero_image fill-1400x1400 as intero_img %}
+                <img src="{{intero_img.url}}" alt="{{intero_img.alt}}">
+            </div>
+        </div>
+    </div>
+{% endif %}
+
 <ul>
     {% for category in self.categories.all %}
         <li> 
