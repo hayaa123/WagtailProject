@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'site_settings',
     'subscribers',
     'blog',
+    'menus',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -92,6 +93,9 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 "wagtail.contrib.settings.context_processors.settings",
             ],
+            'libraries':{
+                'menus_tags':'menus.templatestags.menus_tags'
+            }
         },
     },
 ]
