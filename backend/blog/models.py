@@ -3,6 +3,7 @@ Blog listing and blog detail pages
 """
 
 from django import forms
+from django.core.paginator import EmptyPage, PageNotAnInteger,Paginator
 from django.db import models
 from django.shortcuts import render
 from modelcluster.fields import ParentalKey ,ParentalManyToManyField
@@ -117,9 +118,27 @@ class BlogListingPage(RoutablePageMixin, Page):
         adding custom stuff to our context
         """
         context = super().get_context(request, *args, **kwargs)
-        context['posts'] = BlogDetailPage.objects.live().public()
+        all_posts = BlogDetailPage.objects.live().public().order_by("-first_published_at")
+        paginator = Paginator(all_posts,2)
+        page= request.GET.get("page") 
+        # addind another param into url by passing the name 
+        name = request.GET.get("name")
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+        context["posts"] = posts
+        context ["name"] = name
         context["categories"] = BlogCategory.objects.all
         return context
+
+        # context['posts'] = BlogDetailPage.objects.live().public() # this will display theparent and its children
+        # we can just display the blog detail page without its children using BlogDetailPage.objects.live().exact_type(BlogDetailPage)
+        # we can just display its children using BlogDetailPage.objects.live().not_exact_type(BlogDetailPage)
+        # we can also select any page in its own using  BlogDetailPage.objects.live().exact_type(ArticleBlog)
+       
     content_panels = Page.content_panels + [
         FieldPanel("custom_title"),
     ]
