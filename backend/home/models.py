@@ -4,6 +4,7 @@ from tkinter.font import BOLD, ITALIC
 from turtle import heading, ondrag
 from django.db import models
 from django.shortcuts import render
+from wagtail.api import APIField
 from wagtail.admin.edit_handlers import (FieldPanel ,
     PageChooserPanel,
     StreamFieldPanel,
@@ -36,6 +37,9 @@ class HomePageCaroselImages(Orderable):
 
     panels = [
         ImageChooserPanel("carosel_image")
+    ]
+    api_fields=[
+        APIField("carosel_image")
     ]
 
 class HomePage(RoutablePageMixin,Page):
@@ -71,6 +75,16 @@ class HomePage(RoutablePageMixin,Page):
         null=True,
         blank=True
     )
+
+    api_fields = [
+        APIField("banner_title"),
+        APIField("banner_subtitle"),
+        APIField("banner_image"),
+        APIField("banner_cta"),
+        APIField("carosel_images"),
+        APIField("content"),
+    ]
+
     content_panels = Page.content_panels +[
     MultiFieldPanel([
         FieldPanel("banner_title"),

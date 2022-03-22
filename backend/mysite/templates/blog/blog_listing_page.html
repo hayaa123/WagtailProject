@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailimages_tags wagtailroutablepage_tags %}
+{% load wagtailimages_tags wagtailroutablepage_tags cache %}
 
 {% block content %}
     <a href="{% routablepageurl page 'latest_blog_posts' %}">latest posts</a>
@@ -22,6 +22,7 @@
 
         <h1>{{name}}</h1>
     {% for post in posts %}
+        {% cache 604800 blog_post_preview post.id %}
         <div class="row">
             <div class= "col-sm-3">
                 {% image post.blog_image fill-250x250 as blog_img %}
@@ -37,7 +38,7 @@
                 {% endif %}
                 </a>
             <div>
-            
+        {% endcache %} 
         </div>
     {% endfor %}
 

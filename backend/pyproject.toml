@@ -10,6 +10,9 @@ wagtail = "^2.16.1"
 django-debug-toolbar = "^3.2.4"
 django-extensions = "^3.1.5"
 ipython = "^8.1.1"
+wagtail-django-recaptcha = "^1.0"
+wagtail-eventcalendar = "^0.1.1"
+mutagen = "^1.45.1"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.6.0"

@@ -21,6 +21,13 @@ MIDDLEWARE += [
     ]
 
 INTERNAL_IPS = ('127.0.0.1','127.17.0.1')
+
+CACHES ={
+    "default":{
+        "BACKEND":"django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION":"/home/haya/Projects/wagtailProject/backend/cache"
+    }
+}
 try:
     from .local import *
 except ImportError:

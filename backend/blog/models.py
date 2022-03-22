@@ -4,6 +4,8 @@ Blog listing and blog detail pages
 
 from django import forms
 from django.core.paginator import EmptyPage, PageNotAnInteger,Paginator
+from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
 from django.db import models
 from django.shortcuts import render
 from modelcluster.fields import ParentalKey ,ParentalManyToManyField
@@ -20,8 +22,24 @@ from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.snippets.models import register_snippet
+from wagtail.api import APIField
+
 from streams import blocks
+
+from rest_framework.fields import Field
 # Create your models here.
+
+class ImageSerializedField(Field):
+    """A custom serializer used in Wagtails v2 API."""
+
+    def to_representation(self, value):
+        """Return the image URL, title and dimensions."""
+        return {
+            "url": value.file.url,
+            "title": value.title,
+            "width": value.width,
+            "height": value.height,
+        }
 
 class BlogAuthorsOrderable(Orderable):
     """
@@ -36,6 +54,27 @@ class BlogAuthorsOrderable(Orderable):
     panels = [
         SnippetChooserPanel("author")
     ]
+
+    @property
+    def author_name (self):
+        return self.author.name    
+    @property
+    def author_website (self):
+        return self.author.website   
+    @property
+    def author_image (self):
+        return self.author.image
+    # we added this property to expose more information from the author 
+    # since the author is django model we should add the properties we want here 
+    # because django dont have api_fields attribute 
+
+    api_fields =[
+        APIField("author_name")  ,
+        APIField("author_website"),  
+        # APIField("author_image",serializer=ImageSerializedField) ,# not working 
+        ]
+        
+    
 
 class BlogAuthor(models.Model):
     """
@@ -64,6 +103,9 @@ class BlogAuthor(models.Model):
         heading="link"
         )
     ]
+    # api_fields = [
+    #     APIField("name")
+
 
     def __str__(self) -> str:
         return self.name
@@ -209,6 +251,28 @@ class BlogDetailPage (Page):
         ],heading="Categories"
         )
     ]
+    
+    api_fields =[
+          APIField("blog_authors")  
+        ]
+
+    # def save(self,*args, **kwargs):
+
+    #     key = make_template_fragment_key(
+    #         "blog_post_preview",
+    #         [self.id])
+    #     cache.delete(key)
+        # key = make_template_fragment_key(
+        #     "navigation",
+        #     )
+        # cache.delete(key)
+        # return super().save(*args,**kwargs) 
+        # the save comes from  page model
+        # here we can put the lines we want to render 
+        # when saving these model  
+        
+
+
 
 
 # first subclass blog post page
