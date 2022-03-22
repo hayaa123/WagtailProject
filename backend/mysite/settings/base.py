@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'subscribers',
     'blog',
     'menus',
-    'contact',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -52,7 +51,8 @@ INSTALLED_APPS = [
 
     'modelcluster',
     'taggit',
-
+    'rest_framework',
+    'wagtail.api.v2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

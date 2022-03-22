@@ -9,6 +9,8 @@ from wagtail.contrib.sitemaps.views import sitemap
 
 from search import views as search_views
 
+from .api import api_router
+
 import debug_toolbar
 
 urlpatterns = [
@@ -17,6 +19,19 @@ urlpatterns = [
     path('admin/', include(wagtailadmin_urls)),
     path('documents/', include(wagtaildocs_urls)),
 
+    path('api/v2/', api_router.urls),
+    # to filter a specific type of pages we use api/v2/pages/?type=Blog.blogPaage (eg)
+    # to access specific field of a database we use api/v2/pages/1/?fields=_,banner_title,banner_cta ...etc
+    # to access all the field except some field we use api/v2/pages/1/?fields=*,-banner_title,-banner_cta
+    # for pagination we use api/v2/pages/?limit=4 (this gives us the first 4) 
+    # for pagination we use api/v2/pages/?limit=4&offset=4 (this gives us the last 4)
+    # to order the response by some field we use  api/v2/pages/?order=title
+    # to order the response by some field in reverse we use  api/v2/pages/?order=-title
+    # to search in a searchable fiels we use api/v2/pages/?search=blog 
+    # to find a page by its html path http://127.0.0.1:8000/api/v2/pages/find/?html_path=/
+    # 
+
+    
     path('search/', search_views.search, name='search'),
     path('sitemap.xml', sitemap),
 
