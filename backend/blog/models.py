@@ -185,6 +185,42 @@ class BlogListingPage(RoutablePageMixin, Page):
         FieldPanel("custom_title"),
     ]
 
+    @route(r"^year/(\d+)/(\d+)/",name="blogs_by_year")
+    def blogs_by_year(self,request,year,month):
+        # the year argument is to get access to the slug that been written in the url
+        
+        context = self.get_context(request)
+        print(year)
+        print(year)
+        print(year)
+        print(month)
+        print(month)
+        return render(request, "blog/latest_posts.html", context)
+
+
+    @route(r"^category/(?P<cat_slug>[-\w]*)/$",name="category_view")
+    def category_view(self, request, cat_slug):
+        """Find blog posts based on a category."""
+        context = self.get_context(request)
+
+        try:
+            # Look for the blog category by its slug.
+            category = BlogCategory.objects.get(slug=cat_slug)
+            
+        except Exception:
+            # Blog category doesnt exist (ie /blog/category/missing-category/)
+            # Redirect to self.url, return a 404.. that's up to you!
+            category = None
+
+        if category is None:
+            # This is an additional check.
+            # If the category is None, do something. Maybe default to a particular category.
+            # Or redirect the user to /blog/ ¯\_(ツ)_/¯
+            pass
+    
+        context["latest_posts"] = BlogDetailPage.objects.live().public().filter(categories__in=[category])
+        # Note: The below template (latest_posts.html) will need to be adjusted
+        return render(request, "blog/latest_posts.html", context)
     @route(r"^latest/$")
     def latest_blog_posts(self, request, *args, **kwargs):
         context = self.get_context(request, *args, **kwargs)
