@@ -10,7 +10,7 @@
     <ul>
         {% for category in categories %}
             <li> 
-                <a href="?category={{category.slug}}">
+                <a href="{% routablepageurl page 'category_view' category.slug %}">
                     {{category.name}}            
                 </a>  
             </li>
