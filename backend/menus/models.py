@@ -1,5 +1,4 @@
 from pickle import FROZENSET
-from tkinter import CASCADE
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
 from wagtail.core.models import Page , Orderable

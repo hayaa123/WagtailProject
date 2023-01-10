@@ -1,7 +1,5 @@
 from pyexpat import features
 from tabnanny import verbose
-from tkinter.font import BOLD, ITALIC
-from turtle import heading, ondrag
 from django.db import models
 from django.shortcuts import render
 from wagtail.api import APIField
