@@ -16,6 +16,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin ,route
 
 
+
 from streams import blocks
 from modelcluster.fields import ParentalKey
 
@@ -68,7 +69,8 @@ class HomePage(RoutablePageMixin,Page):
             ("full_richtext", blocks.RichTextBlock()),
             ("simple_richtext", blocks.SimpleRichTextBlock()),
             ("card",blocks.CardBlock()),
-            ("cta",blocks.CTABlock())
+            ("cta",blocks.CTABlock()),
+            ("doc", blocks.DocBlock())
         ],
         null=True,
         blank=True
@@ -107,3 +109,50 @@ class HomePage(RoutablePageMixin,Page):
         context = self.get_context(request,*args ,**kwargs)
         context["test"] = "hello world"
         return render(request , "home/subscribe.html",context)
+
+# Inherit from PdfViewPageMixin
+# class SimplePdfPage(PdfViewPageMixin, Page):
+    
+#     # you can create fields as you're used to, e.g. StreamField
+#     content = StreamField([
+#         # ("heading", blocks.CharBlock(form_classname="full title")),
+#         ("text", blocks.RichTextBlock()),
+#     ], blank=True)
+    
+#     # content panel for the CMS (same as always)
+#     content_panels = Page.content_panels + [
+#         StreamFieldPanel("content"),
+#     ]
+#     # ROUTE_CONFIG = [
+#     #     ("pdf", r'^$'),
+#     #     ("html", r'^html/$'),
+#     # ]
+    
+    
+#     # OPTIONAL: If you want to include a stylesheet
+#     #stylesheets = ["css/your_stylesheet.css"]
+
+# class PdfOnlyPage(PdfViewPageMixin, Page):
+
+#     # PDF only
+#     ROUTE_CONFIG = [
+#         ("pdf", r'^$'),
+#         ("html", None),
+#     ]
+
+# class HtmlAndPdfPage(PdfViewPageMixin, Page):
+
+#     # HTML first
+#     ROUTE_CONFIG = [
+#         ("html", r'^$'),
+#         ("pdf", r'^pdf/$'),
+#     ]
+    
+# class HtmlAndPdfPage(PdfViewPageMixin, Page):
+    
+#     # PDF first
+#     ROUTE_CONFIG = [
+#         ("pdf", r'^$'),
+#         ("html", r'^html/$'),
+#     ]
+    

@@ -21,18 +21,24 @@ def register_code_styling(features):
         "description": "Code"
     }
 
-    # Step 3
+    # Step 3 
     features.register_editor_plugin(
         "draftail" , feature_name, draftail_features.InlineStyleFeature(control)
     )
 
     # Step 4
     db_conversion = {
-        "from_database_format": {tag: InlineStyleElementHandler(type_)},
-        "to_database_format": {"style_map": {type_: {"element": tag}}}
+        "from_database_format": 
+        {tag: InlineStyleElementHandler(type_)},
+        "to_database_format": 
+        {"style_map": 
+            {
+            type_: {"element": tag}
+            }
+        }
     }
 
-    # Step 5
+    # Step 5 adding the tag to your draftail editor 
     features.register_converter_rule("contentstate", feature_name, db_conversion)
 
     # Step 6. This is optional

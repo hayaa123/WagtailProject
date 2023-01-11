@@ -40,13 +40,11 @@
           
               <div class="collapse navbar-collapse" id="navbarColor01">
                     <div class="navbar-nav">
-                            {% cache 604800 navigation %}
                             {% for item in navigation.menu_item.all %}
                                 <li>
                                     <a href = "{{item.link}}" class = "nav-link {% if item.open_in_new_tab %}target='_blank'{% endif %}" >{{item.title}}</a>
                                 </li>   
                             {% endfor %}
-                            {% endcache %}
                     </div>
               </div>
             </div>

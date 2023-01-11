@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'wagtail.search',
     'wagtail.admin',
     'wagtail.core',
+    "wagtail.contrib.table_block",
+
 
     'modelcluster',
     'taggit',
@@ -64,7 +66,8 @@ INSTALLED_APPS = [
 
 
 ]
-
+ALLOWED_HOSTS =["localhost","0.0.0.0:8000" ]
+SECURE_REFERRER_POLICY= None
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
