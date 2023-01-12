@@ -6,6 +6,10 @@ from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.documents.blocks import DocumentChooserBlock
+# import fitz
+# import io
+# from PIL import Image
+
 
 class TitleAndTextBlock(blocks.StructBlock):
     """
@@ -97,18 +101,23 @@ class DocBlock(blocks.StructBlock):
     """
     title = blocks.CharBlock(required=True , max_length=50)
     doc = DocumentChooserBlock()
-    print("doc_att: ", dir(doc))
+    image = ImageChooserBlock()
+    class Meta:
+        template = "streams/doc2.html"
+        icon = "placeholder"
+        label = "doc with image "
 
-
-    def get_context(self, request,*args,**kwargs):
-        context= super().get_context(request,*args,**kwargs)
-        # context ["doc_data"] = getattr(self.doc)
-        context ["hello"] = "Hello"
-        return context
+class Doc2Block(blocks.StructBlock):
+    """
+    A simple call to action section
+    """
+    title = blocks.CharBlock(required=True , max_length=50)
+    doc = DocumentChooserBlock()
+    
     class Meta:
         template = "streams/doc.html"
         icon = "placeholder"
-        label = "Call to action "
+        label = "doc with embed"
 
 
 

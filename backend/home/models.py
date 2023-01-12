@@ -70,7 +70,8 @@ class HomePage(RoutablePageMixin,Page):
             ("simple_richtext", blocks.SimpleRichTextBlock()),
             ("card",blocks.CardBlock()),
             ("cta",blocks.CTABlock()),
-            ("doc", blocks.DocBlock())
+            ("doc", blocks.DocBlock()),
+            ('doc2',blocks.Doc2Block())
         ],
         null=True,
         blank=True
