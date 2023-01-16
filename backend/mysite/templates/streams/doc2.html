@@ -1,0 +1,8 @@
+{% load wagtailimages_tags %}
+
+<div>
+    I am the doc block
+</div>
+{% image self.image fill-300x200 as img %}
+
+<a href='{{self.doc.url}}' target='_blank'><img src = '{{img.url}}' ></a>
