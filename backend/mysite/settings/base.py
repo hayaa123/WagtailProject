@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'subscribers',
     'blog',
     'menus',
+    'page_with_side'
 
     "wagtail.contrib.typed_table_block",
     # "wagtail.contrib.table_block",
