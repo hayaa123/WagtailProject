@@ -4,8 +4,8 @@ Blog listing and blog detail pages
 
 from django import forms
 from django.core.paginator import EmptyPage, PageNotAnInteger,Paginator
-from django.core.cache import cache
-from django.core.cache.utils import make_template_fragment_key
+# from django.core.cache import cache
+# from django.core.cache.utils import make_template_fragment_key
 from django.db import models
 from django.shortcuts import render
 from modelcluster.fields import ParentalKey ,ParentalManyToManyField
@@ -23,8 +23,6 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.snippets.models import register_snippet
 from wagtail.api import APIField
-
-from streams import blocks
 
 from rest_framework.fields import Field
 # Create your models here.
@@ -266,7 +264,8 @@ class BlogDetailPage (Page):
             ("full_richtext", blocks.RichTextBlock()),
             ("simple_richtext", blocks.SimpleRichTextBlock()),
             ("card", blocks.CardBlock()),
-            ("cta", blocks.CTABlock())
+            ("cta", blocks.CTABlock()),
+            ("html", blocks.RawHTMLBlockTest()),
         ],
         null=True,
         blank=True
@@ -327,7 +326,7 @@ class ArticleBlogPage(BlogDetailPage):
         "wagtailimages.Image",
         blank=True,
         null=True,
-        on_delete = models.CASCADE,
+        on_delete = models.PROTECT,
     )
 
     content_panels = Page.content_panels + [

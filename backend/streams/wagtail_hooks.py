@@ -4,7 +4,6 @@ from wagtail.admin.rich_text.converters.html_to_contentstate import (
 )
 from wagtail.core import hooks
 
-
 @hooks.register("register_rich_text_features")
 def register_code_styling(features):
     """Add the <code> to the richtext editor and page."""

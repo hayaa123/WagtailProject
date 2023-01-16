@@ -1,5 +1,16 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags menus_tags %}
+{% block header %}
+<nav class="navbar navbar-expand-lg bg-light">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    {% for item in self.menu.items %}
+        {% include_block item %}
+    {% endfor %}
+    </ul>
+</nav>
+{% endblock header %}
+
+
 {% block content %}
 
     {% image self.banner_image width-1500 as img %}
@@ -42,4 +53,17 @@
         </button>
       </div>
       </div>
+      <div>
+        {% for block in page.content %}
+            {% include_block block %}
+        {% endfor %}
+      </div>
+{% endblock %}
+
+{% block footer %}
+{% comment %} {% get_menu "footer" as footer %} {% endcomment %}
+{% comment %} {{footer}} {% endcomment %}
+      {% for s in self.footer.school_item.all %}
+        {{s}}
+      {% endfor %}
 {% endblock %}

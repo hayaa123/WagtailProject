@@ -31,6 +31,17 @@ class FlexPage (Page):
     
     ]
 
+    @property
+    def menu(self):
+        return self.get_parent().specific.menu
+    
+    @property
+    def footer(self):
+        return self.get_parent().specific.footer
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['test_parent'] = self.get_parent().specific.menu
+        return context
     class Meta:
         verbose_name = "Flex Page"
         verbose_name_plural = "Flex Pages"
