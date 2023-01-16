@@ -4,6 +4,11 @@ Streamfield live in here
 
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.contrib.table_block.blocks import TableBlock
+from wagtail.documents.blocks import DocumentChooserBlock
+# import fitz
+# import io
+# from PIL import Image
 
 
 class TitleAndTextBlock(blocks.StructBlock):
@@ -88,6 +93,34 @@ class CTABlock(blocks.StructBlock):
         template = "streams/cta_block.html"
         icon = "placeholder"
         label = "Call to action "
+
+
+class DocBlock(blocks.StructBlock):
+    """
+    A simple call to action section
+    """
+    title = blocks.CharBlock(required=True , max_length=50)
+    doc = DocumentChooserBlock()
+    image = ImageChooserBlock()
+    class Meta:
+        template = "streams/doc2.html"
+        icon = "placeholder"
+        label = "doc with image "
+
+class Doc2Block(blocks.StructBlock):
+    """
+    A simple call to action section
+    """
+    title = blocks.CharBlock(required=True , max_length=50)
+    doc = DocumentChooserBlock()
+    
+    class Meta:
+        template = "streams/doc.html"
+        icon = "placeholder"
+        label = "doc with embed"
+
+
+
 class LinkStructValue(blocks.StructValue):
     """
     additional logic for our urls
