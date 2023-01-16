@@ -33,6 +33,8 @@ INSTALLED_APPS = [
     'blog',
     'menus',
 
+    "wagtail.contrib.typed_table_block",
+    # "wagtail.contrib.table_block",
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.contrib.settings',

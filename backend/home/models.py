@@ -1,5 +1,3 @@
-from pyexpat import features
-from tabnanny import verbose
 from django.db import models
 from django.shortcuts import render
 from wagtail.api import APIField
@@ -14,12 +12,12 @@ from wagtail.core.fields import (
     StreamField)
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin ,route
-
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 
 from streams import blocks
 from modelcluster.fields import ParentalKey
-
+from menus.models import Header, Footer
 
 class HomePageCaroselImages(Orderable):
     """Between 1 and 5 images in the home page carosel """
@@ -47,7 +45,7 @@ class HomePage(RoutablePageMixin,Page):
     """
     templates ="templates/home/home_page.html"
     banner_title = models.CharField(max_length=100,blank=False,null=True)
-    max_count = 1
+    # max_count = 1
     banner_subtitle =RichTextField(features=["bold","italic"])
     banner_image = models.ForeignKey(
         "wagtailimages.Image",
@@ -63,6 +61,9 @@ class HomePage(RoutablePageMixin,Page):
         on_delete=models.SET_NULL,
         related_name="+"
     )
+
+    menu = models.ForeignKey(Header, null=True, on_delete=models.SET_NULL, related_name='menu')
+    footer = models.ForeignKey(Footer, null=True, on_delete=models.SET_NULL, related_name='footer')
     content = StreamField(
         [
             ("title_and_text", blocks.TitleAndTextBlock()),
@@ -98,7 +99,9 @@ class HomePage(RoutablePageMixin,Page):
     InlinePanel("carosel_images",max_num=5,min_num=1,label="Image"),
     ],heading="Carosel Images"),
 
-    StreamFieldPanel("content")
+    StreamFieldPanel("content"),
+    SnippetChooserPanel('menu'),
+    SnippetChooserPanel('footer'),
     ]
 
     class Meta :

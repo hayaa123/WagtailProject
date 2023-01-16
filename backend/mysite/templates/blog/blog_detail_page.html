@@ -9,7 +9,16 @@
   </div>
 </div>
 
-{% for block in self.content %} {% include_block block %} {% endfor %}
+{% for block in page.content %}
+    {% if block.block_type == 'html' %}
+        <style>
+          .tg{
+            margin: auto;
+          }
+        </style>
+    {% endif %}
+    {% include_block block %}
+{% endfor %}
 <ul>
   {% for author in self.blog_authors.all %}
   {% image author.author.image fill-100x100 as img%}
@@ -33,4 +42,8 @@
 
     {% endfor %}
 </ul>
+
+
+
+</div>
 {% endblock content %}
