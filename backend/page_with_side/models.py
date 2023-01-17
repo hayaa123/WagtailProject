@@ -48,6 +48,12 @@ class AdmissionPage(Page):
     subpage_types =[
         'page_with_side.NavSection'
     ]
+    
+    @property
+    def menu(self):
+        return self.get_parent().specific.menu
+    
+
 
 class NavSection(Page):
     template = 'page_with_side/nav_section.html'    
@@ -66,6 +72,9 @@ class NavSection(Page):
         null=True,
         blank=True
     )
+    @property
+    def menu(self):
+        return self.get_parent().specific.menu
     
     def get_context(self, request, *args, **kwargs):
         context= super().get_context(request, *args, **kwargs)

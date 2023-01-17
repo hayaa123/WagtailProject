@@ -196,21 +196,31 @@
             }
         }
     </style>
-    <header class="header" id="header">
-        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-        <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>
-    </header>
+    {% block header %}
+    <nav class="navbar navbar-expand-lg bg-light">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% for item in self.menu.items %}
+            {% include_block item %}
+        {% endfor %}
+        </ul>
+    </nav>
+    {% endblock header %}
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
+            <div class="nav_list">
             {% for item in nav_info %}
-            <div> <a href="{{item.url}}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
-                        class="nav_logo-name">BBBootstrap</span> </a>
+            <a href="{{item.url}}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon {% if item.url == self.url %}active{% endif %}'></i> <span
+                        class="nav_logo-name">{{item.title}}</span> </a>
+            
             {% endfor %}
+            </div>
         </nav>
     </div>
     <!--Container Main start-->
     <div class="height-100 bg-light">
-        <h4>Main Components</h4>
+        {% for block in self.content %}
+        {% include_block block %}
+    {% endfor %}
     </div>
     <!--Container Main end-->
     <script>
