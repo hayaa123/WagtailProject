@@ -6,7 +6,8 @@ from wagtail.images.blocks import ImageChooserBlock
 from wagtail.contrib.table_block.blocks import TableBlock 
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.contrib.typed_table_block.blocks import TypedTableBlock
-
+from wagtail.contrib.table_block.blocks import TableBlock
+from wagtail.documents.blocks import DocumentChooserBlock
 
 class HeaderItemBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=True, max_length=255)
@@ -166,3 +167,28 @@ class ButtonBlock(blocks.StructBlock):
         icon = "placeholder"
         label = "Single Button"
         value_class = LinkStructValue # we add this when we want to transfer the logic from template to python
+        
+
+class DocBlock(blocks.StructBlock):
+    """
+    A simple call to action section
+    """
+    title = blocks.CharBlock(required=True , max_length=50)
+    doc = DocumentChooserBlock()
+    image = ImageChooserBlock()
+    class Meta:
+        template = "streams/doc2.html"
+        icon = "placeholder"
+        label = "doc with image "
+
+class Doc2Block(blocks.StructBlock):
+    """
+    A simple call to action section
+    """
+    title = blocks.CharBlock(required=True , max_length=50)
+    doc = DocumentChooserBlock()
+
+    class Meta:
+        template = "streams/doc.html"
+        icon = "placeholder"
+        label = "doc with embed"
