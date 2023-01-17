@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'blog',
     'menus',
     'page_with_side',
-
     "wagtail.contrib.typed_table_block",
     # "wagtail.contrib.table_block",
     'wagtail.contrib.forms',
@@ -58,6 +57,7 @@ INSTALLED_APPS = [
     'taggit',
     'rest_framework',
     'wagtail.api.v2',
+    'django_user_agents',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -80,6 +80,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 

@@ -3,10 +3,8 @@ Streamfield live in here
 """
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
-from wagtail.contrib.table_block.blocks import TableBlock 
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.contrib.typed_table_block.blocks import TypedTableBlock
-from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.documents.blocks import DocumentChooserBlock
 
 class HeaderItemBlock(blocks.StructBlock):
@@ -92,6 +90,33 @@ class CardBlock(blocks.StructBlock):
             ]
         )
     )
+    # make the logic here
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context)
+
+        outer_list = []
+        inner_list = []
+        for card in value['cards']:
+            inner_list.append(card)
+            if len(inner_list) == 3:
+                outer_list.append(inner_list)
+                inner_list = []
+        if len(inner_list) != 0:
+            outer_list.append(inner_list)
+        dic = {
+            'default': outer_list[0],
+            'others' : outer_list[1:]
+        }
+        value['cards'] = dic
+        # print('context--->', '*'*50, value['cards'])
+        return context
+    # def get_context(self, request, *args, **kwargs):
+    #     context = super().get_context(request, *args, **kwargs)
+    #     print('self--->', self)
+    #     print('request--->', request)
+    #     print('*args--->', *args)
+    #     print('**kwargs--->', **kwargs)
+    #     return context
 
     class Meta:
         template = "streams/cards.html"

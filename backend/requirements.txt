@@ -4,13 +4,14 @@ beautifulsoup4==4.9.3
 certifi==2021.10.8
 charset-normalizer==2.0.12
 Django==4.0.2
+django-debug-toolbar==3.8.1
 django-extensions==3.2.1
 django-filter==21.1
 django-modelcluster==5.2
 django-permissionedforms==0.1
 django-taggit==2.1.0
 django-treebeard==4.5.1
-django_debug_toolbar==3.8.1
+django-user-agents==0.4.0
 djangorestframework==3.13.1
 draftjs-exporter==2.1.7
 et-xmlfile==1.1.0
@@ -26,7 +27,9 @@ soupsieve==2.3.2.post1
 sqlparse==0.4.3
 tablib==3.3.0
 telepath==0.3
+ua-parser==0.16.1
 urllib3==1.26.8
+user-agents==2.2.0
 wagtail==2.16.1
 webencodings==0.5.1
 Willow==1.4
