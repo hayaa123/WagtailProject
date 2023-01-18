@@ -119,7 +119,7 @@ class CardBlock(blocks.StructBlock):
     #     return context
 
     class Meta:
-        template = "streams/cards.html"
+        template = "streams/card_with_js.html"
         icon = "placeholder"
         label = "Somthing Cards"
 
